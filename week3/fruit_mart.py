@@ -4,6 +4,11 @@ class FruitMart:
     def __init__(self, name):
         self.__name = name
         self.__fruits = []  # empty list of fruits
+        self.__total_sale = 0
+
+    @property
+    def total_sale(self):
+        return self.__total_sale
 
     @property
     def name(self):
@@ -19,7 +24,7 @@ class FruitMart:
     
     def import_fruit(self, fruit, quantity):
         if fruit in self.__fruits:
-            fruit.quantiy += quantity
+            fruit.quantity += quantity
         else:
             fruit.quantity = quantity
             self.__fruits.append(fruit)
@@ -34,6 +39,8 @@ class FruitMart:
             return
         
         fruit.quantity -= quantity
+        self.__total_sale += quantity * fruit.price
+
         print(f'Sell {quantity} {fruit.name}. In stock: {fruit.quantity}')
 
     def get_fruit(self, number):
