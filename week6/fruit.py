@@ -38,4 +38,4 @@ class Fruit:
         self.__price = new_price
 
     def __str__(self):
-        return f'{self.__name}, quantity={self.__quantity}, price=${self.__price})'
+        return f'{self.__name}, quantity={self.__quantity}, price=${self.__price}'
