@@ -73,10 +73,42 @@ class DemoApp04(BaseGUI):
         mb.showinfo("Success", "Fruit added successfully!")
 
     def __btn_edit_click(self):
-        pass
+        try:
+            selected_index = self.lst_fruits.curselection()[0]
+            fruit = self.fruits[selected_index]  # get the selected fruit
+            # get new values from the entry fields
+            name = self.fruit.get()
+            quantity = int(self.quantity.get())
+            price = float(self.price.get())
+        except IndexError:  # no fruit selected
+            mb.showerror("Error", "No fruit selected!")
+            return
+        except ValueError:  # invalid input for quantity or price
+            mb.showerror("Error", "Quantity and Price must be numbers!")
+            return
+        # update the fruit object
+        fruit.name = name
+        fruit.quantity = quantity
+        fruit.price = price
+        # update the listbox
+        self.lst_fruits.delete(selected_index)
+        self.lst_fruits.insert(selected_index, str(fruit))
+        mb.showinfo("Success", "Fruit updated successfully!")
 
     def __btn_del_click(self):
-        pass
+        # get the selected index
+        try:
+            selected_index = self.lst_fruits.curselection()[0]
+        except IndexError:  # no fruit selected
+            mb.showerror("Error", "No fruit selected!")
+            return
+
+        # delete the selected fruit from the list and listbox
+        del self.fruits[selected_index]  # remove from the list
+        self.lst_fruits.delete(selected_index)  # remove from the listbox
+
+        # show a success message
+        mb.showinfo("Success", "Fruit deleted successfully!")
 
     def __btn_load_click(self):
         fruit_file = askopenfilename(filetypes=[("CSV files", "*.csv"),   # file type for csv
