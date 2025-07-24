@@ -1,0 +1,2 @@
+id,purpose,input,expected,actual,result
+1,normal case,n=5 c="*",*****,"*****",pass
